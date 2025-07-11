@@ -14,8 +14,22 @@
                     <div class="btn-group">
                         <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">My Account</button>
                         <div class="dropdown-menu dropdown-menu-right">
-                            <button class="dropdown-item" type="button">Sign in</button>
-                            <button class="dropdown-item" type="button">Sign up</button>
+                            @guest()
+                                <a href="{{ route('login') }}">
+                                    <button class="dropdown-item" type="button">Sign in</button>
+                                </a>
+                                <a href="{{ route('register') }}">
+                                    <button class="dropdown-item" type="button">Sign up</button>
+                                </a>
+                            @endguest
+                            @auth
+                                <!-- Log out -->
+                                <form method="POST" action="{{ route('logout') }}">
+                                    @csrf
+                                    <button class="dropdown-item" type="button" onclick="event.preventDefault();
+                                    this.closest('form').submit();">{{ __('Log Out') }}</button>
+                                </form>
+                            @endauth
                         </div>
                     </div>
                     <div class="btn-group mx-2">
