@@ -2,16 +2,17 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
 use App\Models\User;
-use Illuminate\Auth\Events\PasswordReset;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Password;
-use Illuminate\Support\Str;
-use Illuminate\Validation\Rules;
 use Illuminate\View\View;
+use Illuminate\Support\Str;
+use Illuminate\Http\Request;
+use Illuminate\Validation\Rules;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Password;
+use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Auth\Events\PasswordReset;
 
 class NewPasswordController extends Controller
 {
@@ -20,7 +21,8 @@ class NewPasswordController extends Controller
      */
     public function create(Request $request): View
     {
-        return view('auth.reset-password', ['request' => $request]);
+        // return view('auth.reset-password', ['request' => $request]);
+        return view('front.user.reset-password', ['request' => $request]);
     }
 
     /**
@@ -54,9 +56,17 @@ class NewPasswordController extends Controller
         // If the password was successfully reset, we will redirect the user back to
         // the application's home authenticated view. If there is an error we can
         // redirect them back to where they came from with their error message.
-        return $status == Password::PASSWORD_RESET
-                    ? redirect()->route('login')->with('status', __($status))
-                    : back()->withInput($request->only('email'))
-                        ->withErrors(['email' => __($status)]);
+        // Old code for redirect:
+        // return $status == Password::PASSWORD_RESET
+        //             ? redirect()->route('login')->with('status', __($status))
+        //             : back()->withInput($request->only('email'))
+        //                 ->withErrors(['email' => __($status)]);
+        // New code for redirect with SweetAlert:
+        if ($status == Password::PASSWORD_RESET) {
+            Alert::success('Status', __($status));
+            return redirect()->route('login')->with('status', __($status));
+        } else {
+            return back()->withInput($request->only('email'))->withErrors(['email' => __($status)]);
+        }
     }
 }
