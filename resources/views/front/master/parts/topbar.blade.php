@@ -23,6 +23,10 @@
                                 </a>
                             @endguest
                             @auth
+                                <!-- My Account -->
+                                <a href="{{ route('my-account-page') }}">
+                                    <button class="dropdown-item" type="button">My Account</button>
+                                </a>
                                 <!-- Log out -->
                                 <form method="POST" action="{{ route('logout') }}">
                                     @csrf
