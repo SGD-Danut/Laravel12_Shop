@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\Admin\ManagerController;
 use App\Http\Controllers\Admin\StaffAuthController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\StaffController;
+use App\Http\Middleware\IsManager;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,3 +28,7 @@ Route::prefix('admin')->controller(StaffAuthController::class)->group(function (
 // Ruta pentru deconectare:
 Route::post('/admin/logout', [StaffAuthController::class, 'staffLogout'])->middleware(['auth:staff'])->name('staff-logout');
 
+// Rute pentru administratorii cu tipul de manager
+Route::get('/admin/staff', [ManagerController::class, 'showStaffMembers'])->middleware(['auth:staff', IsManager::class])->name('show-staff');
+Route::get('/admin/new-staff', [ManagerController::class, 'showNewStaffForm'])->middleware(['auth:staff', IsManager::class])->name('show-new-staff');
+Route::post('/admin/create-staff', [ManagerController::class, 'createNewStaffMember'])->middleware(['auth:staff', IsManager::class])->name('create-new-staff');

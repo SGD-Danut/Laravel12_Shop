@@ -40,6 +40,8 @@
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
 
+                    @include('admin.master.parts.messages')
+
                     @yield('content')
 
                 </div>
@@ -79,6 +81,8 @@
     <!-- Page level custom scripts -->
     <script src="{{ asset('admin/js/demo/chart-area-demo.js') }}"></script>
     <script src="{{ asset('admin/js/demo/chart-pie-demo.js') }}"></script>
+
+    @yield('custom-js')
 
     @include('sweetalert::alert')
 </body>
