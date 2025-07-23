@@ -32,3 +32,5 @@ Route::post('/admin/logout', [StaffAuthController::class, 'staffLogout'])->middl
 Route::get('/admin/staff', [ManagerController::class, 'showStaffMembers'])->middleware(['auth:staff', IsManager::class])->name('show-staff');
 Route::get('/admin/new-staff', [ManagerController::class, 'showNewStaffForm'])->middleware(['auth:staff', IsManager::class])->name('show-new-staff');
 Route::post('/admin/create-staff', [ManagerController::class, 'createNewStaffMember'])->middleware(['auth:staff', IsManager::class])->name('create-new-staff');
+Route::get('/admin/edit-staff/{id}', [ManagerController::class, 'editStaffMember'])->middleware(['auth:staff', IsManager::class])->name('edit-staff');
+Route::put('/admin/update-staff/{id}', [ManagerController::class, 'updateStaffMember'])->middleware(['auth:staff', IsManager::class])->name('update-staff');

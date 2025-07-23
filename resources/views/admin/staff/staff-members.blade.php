@@ -50,11 +50,15 @@
                                 @if ($staffMember->photo == 'staff-member.png')
                                     <img src="{{ asset('admin/img/staff/' . $staffMember->photo) }}" width="60" alt="No staff image">
                                 @else
-                                    <img src="{{ asset('storage/images/admin/staff/' . $staffMember->photo) }}" width="60" alt="No staff image">
+                                    <img src="{{ $staffMember->photoUrl() }}" width="60" alt="No staff image">
                                 @endif
                             </td>
                             <td>{{ $staffMember->type }}</td>
-                            <td></td>
+                            <td>
+                                <a title="Edit staff member" href="{{ route('edit-staff', $staffMember->id) }}" class="btn btn-success btn-circle">
+                                    <i class="fas fa-user-edit"></i>
+                                </a>
+                            </td>
                         </tr>
                         @empty
                             <p>Nu sunt membrii staff!</p>
