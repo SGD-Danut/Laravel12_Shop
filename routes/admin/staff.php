@@ -34,3 +34,7 @@ Route::get('/admin/new-staff', [ManagerController::class, 'showNewStaffForm'])->
 Route::post('/admin/create-staff', [ManagerController::class, 'createNewStaffMember'])->middleware(['auth:staff', IsManager::class])->name('create-new-staff');
 Route::get('/admin/edit-staff/{id}', [ManagerController::class, 'editStaffMember'])->middleware(['auth:staff', IsManager::class])->name('edit-staff');
 Route::put('/admin/update-staff/{id}', [ManagerController::class, 'updateStaffMember'])->middleware(['auth:staff', IsManager::class])->name('update-staff');
+Route::put('/admin/update-staff-password/{id}', [ManagerController::class, 'updateStaffMemberPassword'])->middleware(['auth:staff', IsManager::class])->name('update-staff-password');
+Route::delete('/admin/block-staff/{id}', [ManagerController::class, 'blockStaffMember'])->middleware(['auth:staff', IsManager::class])->name('block-staff');
+Route::put('/admin/restore-staff/{id}', [ManagerController::class, 'restoreStaffMember'])->middleware(['auth:staff', IsManager::class])->name('restore-staff');
+Route::put('/admin/delete-staff/{id}', [ManagerController::class, 'permanentDeleteStaffMember'])->middleware(['auth:staff', IsManager::class])->name('delete-staff');

@@ -79,6 +79,42 @@
                 </div>
             </div>
         </div>
+        <!-- Change Member Password Card -->
+        <div class="col-xl-4 col-lg-5">
+          <div class="card shadow mb-4">
+              <!-- Card Header - Dropdown -->
+              <div
+                  class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                  <h6 class="m-0 font-weight-bold text-primary">Change member password</h6>
+              </div>
+              <!-- Card Body -->
+              <div class="card-body">
+                <form id="change-password" action="{{ route('update-staff-password', $staffMember->id) }}" method="POST" enctype="multipart/form-data">
+                  @csrf
+                  @method('put')
+                    <div class="form-group">
+                        <label for="inputPassword">Password</label>
+                        <input name="password" type="password" class="form-control @error('password') is-invalid @enderror" id="inputPassword">
+                        @error('password')
+                          <div id="inputPasswordFeedback" class="invalid-feedback">
+                            {{ $message }}
+                          </div>
+                        @enderror
+                    </div>
+                    <div class="form-group">
+                        <label for="password_confirmation">Confirm password</label>
+                        <input name="password_confirmation" type="password" class="form-control @error('password_confirmation') is-invalid @enderror" id="password_confirmation">
+                        @error('password_confirmation')
+                          <div id="inputPasswordConfirmationFeedback" class="invalid-feedback">
+                            {{ $message }}
+                          </div>
+                        @enderror
+                    </div>
+                    <button type="submit" class="btn btn-primary">Update Password</button>
+                </form>
+              </div>
+          </div>
+      </div>
     </div>
 @endsection
 

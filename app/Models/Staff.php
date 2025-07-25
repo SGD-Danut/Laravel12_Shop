@@ -3,9 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Staff extends Authenticatable
 {
+    use SoftDeletes;
+
     protected $guarded = [];
     // photoUrl() folosită pentru afișarea imaginii membrului staff
     public function photoUrl() {
