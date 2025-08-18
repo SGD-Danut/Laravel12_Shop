@@ -11,7 +11,7 @@ use App\Http\Middleware\IsManager;
 | Web Routes
 |--------------------------------------------------------------------------
 |
-| Mai jos o să scriem Rutele web pentru paginile din front-end.
+| Mai jos o să scriem Rutele web pentru membrii staff.
 |
 */
 
