@@ -16,4 +16,6 @@ Route::prefix('admin/content/sections')->middleware(['auth:staff'])->group(funct
     Route::get('show-sections', [SectionController::class, 'showSections'])->name('show-sections');
     Route::get('new-section', [SectionController::class, 'showNewSectionForm'])->name('new-section');
     Route::post('create-new-section', [SectionController::class, 'createNewSection'])->name('create-new-section');
+    Route::get('edit-section/{sectionId}', [SectionController::class, 'showEditSectionForm'])->name('edit-section');
+    Route::put('update-section/{sectionId}', [SectionController::class, 'updateSection'])->name('update-section');
 });

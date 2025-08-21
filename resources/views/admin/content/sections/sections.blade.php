@@ -63,7 +63,10 @@
                                     @livewire('admin.section-status',['section' => $section])
                                 </td>
                                 <td>
-                                    
+                                    {{-- Edit section button: --}}
+                                    <a title="Edit section" href="{{ route('edit-section', $section->id) }}" class="btn btn-success btn-circle">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
                                 </td>                                                        
                             </tr>
                         @empty
