@@ -13,4 +13,4 @@ use App\Http\Middleware\IsManager;
 |
 */
 
-Route::get('admin/users', [UserController::class, 'showUsers'])->middleware(['auth:staff', IsManager::class]);
+Route::get('admin/users', [UserController::class, 'showUsers'])->middleware(['auth:staff', IsManager::class])->name('show-users');

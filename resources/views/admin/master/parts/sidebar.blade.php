@@ -20,32 +20,59 @@
     </li>
 
     {{-- Staff dropdown menu start --}}
+    @can('manager')
+        <!-- Divider -->
+        <hr class="sidebar-divider">
+
+        <!-- Heading -->
+        <div class="sidebar-heading">
+            Users
+        </div>
+
+        <!-- Nav Item - Pages Collapse Menu -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseStaff"
+                aria-expanded="true" aria-controls="collapseStaff">
+                <i class="fas fa-users fa-cog"></i>
+                <span>Staff</span>
+            </a>
+            <div id="collapseStaff" class="collapse" aria-labelledby="headingStaff" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">Staff Components:</h6>
+                    <a class="collapse-item" href="{{ route('show-staff') }}">Staff</a>
+                    <a class="collapse-item" href="{{ route('show-users') }}">Users</a>
+                </div>
+            </div>
+        </li>
+    @endcan
+    {{-- Staff dropdown menu end --}}
+
+    {{-- Content dropdown menu start --}}
 
     <!-- Divider -->
     <hr class="sidebar-divider">
 
     <!-- Heading -->
     <div class="sidebar-heading">
-        Users
+        Content
     </div>
 
     <!-- Nav Item - Pages Collapse Menu -->
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseStaff"
-            aria-expanded="true" aria-controls="collapseStaff">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseContent"
+            aria-expanded="true" aria-controls="collapseContent">
             <i class="fas fa-users fa-cog"></i>
-            <span>Staff</span>
+            <span>Content</span>
         </a>
-        <div id="collapseStaff" class="collapse" aria-labelledby="headingStaff" data-parent="#accordionSidebar">
+        <div id="collapseContent" class="collapse" aria-labelledby="headingContent" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Staff Components:</h6>
-                <a class="collapse-item" href="{{ route('show-staff') }}">Staff members</a>
+                <h6 class="collapse-header">Content Components:</h6>
+                <a class="collapse-item" href="{{ route('show-sections') }}">Sections</a>
             </div>
         </div>
     </li>
 
-    {{-- Staff dropdown menu end --}}
-
+    {{-- Content dropdown menu end --}}
 
     <!-- Divider -->
     <hr class="sidebar-divider">
@@ -143,7 +170,7 @@
 
     <!-- Sidebar Message -->
     <div class="sidebar-card d-none d-lg-flex">
-        <img class="sidebar-card-illustration mb-2" src="img/undraw_rocket.svg" alt="...">
+        <img class="sidebar-card-illustration mb-2" src="{{ asset('admin/img/undraw_rocket.svg') }}" alt="...">
         <p class="text-center mb-2"><strong>SB Admin Pro</strong> is packed with premium features, components, and more!</p>
         <a class="btn btn-success btn-sm" href="https://startbootstrap.com/theme/sb-admin-pro">Upgrade to Pro!</a>
     </div>

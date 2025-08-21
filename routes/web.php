@@ -22,3 +22,4 @@ require __DIR__.'/front/pages.php';
 require __DIR__.'/front/my-account.php';
 require __DIR__.'/admin/staff.php';
 require __DIR__.'/admin/users.php';
+require __DIR__.'/admin/content/sections.php';
