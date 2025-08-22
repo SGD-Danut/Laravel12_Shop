@@ -18,4 +18,8 @@ class Section extends Model
     public function imagePath() {
         return 'storage/images/admin/content/sections/' . $this->image;
     }
+    // defaultImageUrl() folosită pentru afișarea imaginii default a secțiunii
+    public function defaultImageUrl() {
+        return '/admin/img/content/sections/' . $this->image;
+    } 
 }

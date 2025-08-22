@@ -53,9 +53,9 @@
                                 <td>{{ $section->description }}</td>
                                 <td>
                                     @if ($section->image == 'section.png')
-                                        <img src="{{ asset('admin/img/content/sections/' . $section->image) }}" width="60" alt="No staff image">
+                                        <img src="{{ asset('admin/img/content/sections/' . $section->image) }}" width="60" alt="Section image">
                                     @else
-                                        <img src="{{ $section->imageUrl() }}" width="60" alt="No section image">
+                                        <img src="{{ $section->imageUrl() }}" width="60" alt="Section image">
                                     @endif
                                 </td>
                                 <td>{{ $section->position }}</td>

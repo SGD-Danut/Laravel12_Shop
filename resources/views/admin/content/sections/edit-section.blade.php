@@ -95,7 +95,11 @@
                         <div class="form-group col-md-4">
                           <label for="inputPhoto">Photo</label>
                           <div class="mb-3 rounded mx-auto d-block" id="image-preview">
-                            <img src="{{ $section->imageUrl() }}" width="120" alt="Section image">
+                            @if ($section->image == 'section.png')
+                                <img src="{{ asset('admin/img/content/sections/' . $section->image) }}" width="120" alt="Section image">
+                            @else
+                                <img src="{{ $section->imageUrl() }}" width="120" alt="Section image">
+                            @endif
                           </div>
                           <input name="image" value="{{ old('image') }}" type="file" accept="image/*" class="form-control-file @error('image') is-invalid @enderror" id="inputPhoto">
                           @error('image')

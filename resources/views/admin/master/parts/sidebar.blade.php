@@ -61,7 +61,7 @@
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseContent"
             aria-expanded="true" aria-controls="collapseContent">
-            <i class="fas fa-users fa-cog"></i>
+            <i class="fas fa-box"></i>
             <span>Content</span>
         </a>
         <div id="collapseContent" class="collapse" aria-labelledby="headingContent" data-parent="#accordionSidebar">
