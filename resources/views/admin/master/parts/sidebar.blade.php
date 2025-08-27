@@ -68,6 +68,7 @@
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Content Components:</h6>
                 <a class="collapse-item" href="{{ route('show-sections') }}">Sections</a>
+                <a class="collapse-item" href="{{ route('show-categories') }}">Categories</a>
             </div>
         </div>
     </li>

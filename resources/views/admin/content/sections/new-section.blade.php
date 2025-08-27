@@ -92,7 +92,7 @@
                             </div>
                         </div>
                         <div class="form-group col-md-4">
-                          <label for="inputPhoto">Photo</label>
+                          <label for="inputPhoto">Image</label>
                           <div class="mb-3 rounded mx-auto d-block" id="image-preview">
                             <img src="/admin/img/content/sections/section.png" width="120" alt="Section image">
                           </div>

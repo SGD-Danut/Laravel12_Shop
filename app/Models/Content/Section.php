@@ -21,5 +21,9 @@ class Section extends Model
     // defaultImageUrl() folosită pentru afișarea imaginii default a secțiunii
     public function defaultImageUrl() {
         return '/admin/img/content/sections/' . $this->image;
-    } 
+    }
+
+    public function categories() {
+        return $this->hasMany(Category::class, 'section_id')->orderBy('position');
+    }
 }
