@@ -13,7 +13,7 @@
             fileReader.readAsDataURL(file);
             fileReader.addEventListener("load", function () {
                 imgPreview.style.display = "block";
-                imgPreview.innerHTML = '<img src="' + this.result + '" class="img-thumbnail" alt="Image preview">';
+                imgPreview.innerHTML = '<img src="' + this.result + '" class="img-thumbnail" height="258" alt="Image preview">';
             });
         }
     }

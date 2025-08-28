@@ -2,7 +2,7 @@
   
 @section('content')
     <!-- Page Heading -->
-    <h1 class="h3 mb-2 text-gray-800">Edit Section : <span class="text-info">{{ $section->name }} </span><span class="text-danger">Id: {{ $section->id }}</span></h1>
+    <h1 class="h3 mb-2 text-gray-800">Edit Section : <span class="text-info">{{ $section->name }} </span> with Id:<span class="text-danger"> {{ $section->id }}</span></h1>
     <!-- Content Row -->
     <div class="row">
         <div class="col-xl-12 col-lg-11">
@@ -93,7 +93,7 @@
                             </div>
                         </div>
                         <div class="form-group col-md-4">
-                          <label for="inputPhoto">Photo</label>
+                          <label for="inputPhoto">Image</label>
                           <div class="mb-3 rounded mx-auto d-block" id="image-preview">
                             @if ($section->image == 'section.png')
                                 <img src="{{ asset('admin/img/content/sections/' . $section->image) }}" width="120" alt="Section image">

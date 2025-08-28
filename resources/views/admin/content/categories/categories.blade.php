@@ -54,7 +54,7 @@
                                                 @endif
                                                     {{ $category->name }}
                                             </td>
-                                            <td>{{ $category->description }}</td>
+                                            <td>{!! $category->description !!}</td>
                                             <td>
                                                 @if ($category->image == 'category.png')
                                                     <img src="{{ $category->defaultImageUrl() }}" width="60" alt="category image">
@@ -68,9 +68,9 @@
                                             </td>
                                             <td>
                                                 {{-- Edit category button: --}}
-                                                {{-- <a title="Edit category" href="{{ route('edit-category', $category->id) }}" class="btn btn-success btn-circle">
+                                                <a title="Edit category" href="{{ route('edit-category', $category->id) }}" class="btn btn-success btn-circle">
                                                     <i class="fas fa-edit"></i>
-                                                </a> --}}
+                                                </a>
                                             </td>                                                        
                                         </tr>
                                     @empty
