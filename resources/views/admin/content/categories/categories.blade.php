@@ -64,12 +64,16 @@
                                             </td>
                                             <td>{{ $category->position }}</td>
                                             <td>
-                                                {{-- @livewire('admin.section-status',['section' => $category]) --}}
+                                                @livewire('admin.section-status',['section' => $category])
                                             </td>
                                             <td>
                                                 {{-- Edit category button: --}}
                                                 <a title="Edit category" href="{{ route('edit-category', $category->id) }}" class="btn btn-success btn-circle">
                                                     <i class="fas fa-edit"></i>
+                                                </a>
+                                                {{-- Image gallery for category button: --}}
+                                                <a title="Image gallery for category" href="{{ route('manage-category-images', $category->id) }}" class="btn btn-primary btn-circle">
+                                                    <i class="far fa-images"></i>
                                                 </a>
                                             </td>                                                        
                                         </tr>

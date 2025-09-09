@@ -26,4 +26,13 @@ class Category extends Model
     public function section() {
         return $this->belongsTo(Section::class, 'section_id');
     }
+    // Aceasta este funcția pentru relația One To Many (Polymorphic)
+    public function images() {
+        return $this->morphMany(Image::class, 'imageable')->orderBy('position');
+    }
+
+    // defaultImageUrl() folosită pentru afișarea imaginii default a categoriei
+    public function galleryUrl() {
+        return '/storage/gallery/images/categories/' . $this->id . '/';
+    }
 }

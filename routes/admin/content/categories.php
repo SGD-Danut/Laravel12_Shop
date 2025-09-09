@@ -18,4 +18,5 @@ Route::prefix('admin/content/categories')->middleware(['auth:staff'])->group(fun
     Route::post('create-new-category/{sectionId}', [CategoryController::class, 'createNewCategory'])->name('create-new-category');
     Route::get('edit-category/{categoryId}', [CategoryController::class, 'showEditCategoryForm'])->name('edit-category');
     Route::put('update-category/{categoryId}', [CategoryController::class, 'updateCategory'])->name('update-category');
+    Route::get('/manage-category-images-form/{categoryId}',[CategoryController::class, 'showCategoryImagesForm'])->name('manage-category-images');
 });
