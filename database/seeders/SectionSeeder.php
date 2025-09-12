@@ -13,7 +13,7 @@ class SectionSeeder extends Seeder
      */
     public function run(): void
     {
-        Section::truncate();
+        // Section::truncate();
         Section::factory(6)->create();
     }
 }

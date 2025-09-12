@@ -38,11 +38,12 @@
     </form>
 
     <hr>
+
     {{-- Codul pentru afișarea imaginilor deja încărcatee, cele ce aparțin categoriei: --}}
     @if ($model->images->count() > 0)
         <div class="row row-cols-1 row-cols-md-3">
             @foreach ($model->images as $image)
-                <div class="col mb-4">
+                {{-- <div class="col mb-4">
                     <div class="card h-100">
                         <img src="{{ asset($model->galleryUrl() . $image->name) }}" class="card-img-top" alt="...">
                         <div class="card-body">
@@ -50,8 +51,17 @@
                             <p class="card-text"></p>
                         </div>
                     </div>
-                </div>
+                </div> --}}
+                @livewire('admin.edit-images', ['theOldImageForEditing' => $image, 'path' => 'categories/' . $model->id . '/'])
             @endforeach
+        </div>
+        <div class="card-body">
+            <button onclick="permanentDeleteAllImagesConfirm()" class="btn btn-danger btn-icon-split">
+                <span class="icon text-white-50">
+                    <i class="fas fa-eraser"></i>
+                </span>
+                <span class="text">Delete all images</span>
+            </button>
         </div>
     @else
         <h6 class="text-warning"><strong>{{ $model->name }}</strong> nu are nici-o imagine în galerie.</h6>

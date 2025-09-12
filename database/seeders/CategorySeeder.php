@@ -14,7 +14,7 @@ class CategorySeeder extends Seeder
      */
     public function run(): void
     {
-        Category::truncate();
+        // Category::truncate();
         $sections = Section::all()->each(function ($section) {
             $categories = Category::factory(rand(4, 8))->make();
             $section->categories()->saveMany($categories);

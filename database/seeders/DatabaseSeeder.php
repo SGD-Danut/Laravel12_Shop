@@ -25,8 +25,8 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
             // StaffSeeder::class,
-            // SectionSeeder::class
-            CategorySeeder::class
+            // SectionSeeder::class,
+            // CategorySeeder::class
         ]);
     }
 }

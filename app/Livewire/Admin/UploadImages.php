@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Storage;
 use Livewire\WithFileUploads;
 use Livewire\Attributes\Validate;
 use RealRashid\SweetAlert\Facades\Alert;
+use Livewire\Attributes\On;
 
 class UploadImages extends Component
 {
@@ -88,6 +89,35 @@ class UploadImages extends Component
                 $storage->delete($filePathname);
             }
         }
+    }
+
+    #[On('permanent-delete-image')] 
+    public function permanentDeleteImage($imageId) {
+        // Căutăm imaginea care vrem să o ștergem:
+        $image = Image::findOrFail($imageId);
+        // dd($this->path . '/' . $image->imageable->id . '/' . $image->name);
+        // Ștergem imaginea de pe HDD:
+        Storage::disk('images')->delete($this->path . '/' . $image->imageable->id . '/' . $image->name);
+
+        // Ștergem imaginea din baza de date:
+        $image->delete();
+
+        // Facem refresh la pagină:
+        return redirect(request()->header('Referer'));
+    }
+
+    #[On('permanent-delete-all-images')] 
+    public function permanentDeleteAllImages() {
+        // Ștergem toate imaginile ce apartin modelului din baza de date:
+        foreach ($this->model->images as $key => $image) {
+            $image->delete();
+        }
+
+        // Ștergem toate imaginile ce apartin modelului de pe HDD:
+        Storage::disk('images')->deleteDirectory($this->path . '/' . $this->model->id);
+
+        // Facem refresh la pagină:
+        return redirect(request()->header('Referer'));
     }
 
     public function render()

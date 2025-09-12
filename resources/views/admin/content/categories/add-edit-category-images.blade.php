@@ -36,4 +36,44 @@
             }
         });
     </script>
+    <!-- Permanent delete image with SweetAlert confirm window custom script -->
+    <script>
+        window.permanentDeleteImageConfirm = function(id, name) {
+            Swal.fire({
+                icon: 'question',
+                text: 'Do you want to permanent delete image: ' + name + ' ?',
+                showCancelButton: true,
+                confirmButtonText: 'Permanent delete',
+                confirmButtonColor: '#e3342f',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Livewire.dispatch('permanent-delete-image', { imageId: id });
+                    Swal.fire({
+                        icon: 'info',
+                        text: 'Image: ' + name + ' was deleted!',
+                    })
+                }
+            });
+        }
+    </script>
+    <!-- Permanent delete all images with SweetAlert confirm window custom script -->
+    <script>
+        window.permanentDeleteAllImagesConfirm = function() {
+            Swal.fire({
+                icon: 'question',
+                text: 'Do you want to permanent delete all images ?',
+                showCancelButton: true,
+                confirmButtonText: 'Permanent delete all',
+                confirmButtonColor: '#e3342f',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Livewire.dispatch('permanent-delete-all-images');
+                    Swal.fire({
+                        icon: 'info',
+                        text: 'All images were deleted!',
+                    })
+                }
+            });
+        }
+    </script>
 @endsection

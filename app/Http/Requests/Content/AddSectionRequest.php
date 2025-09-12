@@ -23,7 +23,7 @@ class AddSectionRequest extends FormRequest
     {
         return [
             'name' => 'required|max:50',
-            'description' => 'max:255|nullable',
+            'description' => 'max:765|nullable',
             'position' => 'numeric|nullable',
             'icon' => 'max:255|nullable',
             'active' => 'boolean|nullable',

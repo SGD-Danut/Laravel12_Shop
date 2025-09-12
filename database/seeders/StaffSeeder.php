@@ -13,6 +13,7 @@ class StaffSeeder extends Seeder
      */
     public function run(): void
     {
+        Staff::truncate();
         $staff = new Staff();
         $staff->name = 'manager';
         $staff->email = 'manager@multishop.com';
