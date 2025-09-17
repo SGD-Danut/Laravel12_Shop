@@ -8,6 +8,7 @@ class Image extends Model
 {
     protected $fillable = [
         'name',
+        'title',
         'description',
         'position',
         'imageable_id',

@@ -11,10 +11,11 @@ use Livewire\Attributes\Validate;
 use RealRashid\SweetAlert\Facades\Alert;
 use Livewire\Attributes\On;
 
-class UploadImages extends Component
+class UploadAndEditImages extends Component
 {
     use WithFileUploads;
 
+    // Câmpuri pentru încărcare:
     #[Validate(['images.*' => 'image|max:1024'])]
     public $images = [];
 
@@ -22,6 +23,12 @@ class UploadImages extends Component
 
     public $path;
 
+    // Câmpuri pentru editare:
+    public $newImages = [];
+    public $descriptions = [];
+    public $titles = [];
+
+    // Metode pentru încărcare:
     public function formatFileSize($bytes) {
         // Convertim dimensiunea fișierului din bytes în kilobytes (1 KB = 1024 bytes)
         $kb = $bytes / 1024;
@@ -91,37 +98,107 @@ class UploadImages extends Component
         }
     }
 
+    // Metode pentru editare, ștergere:
+    public function updatedNewImages($value, $key) {
+        // $key = ID-ul imaginii (din wire:model="newImages.{id}")
+        // $value = fișierul uploadat pentru acea imagine
+        
+        try {
+            $this->validateOnly("newImages.$key", [
+                "newImages.$key" => "image|max:1024", // max 1 MB
+            ], [], [
+                "newImages.$key" => "image"
+            ]);
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            // Dacă validarea eșuează, eliminăm fișierul invalid
+            unset($this->newImages[$key]);
+
+            // Trimitem eroarea mai departe pentru a fi afișată
+            throw $e;
+        }
+
+        // Căutăm imaginea în baza de date
+        $image = Image::findOrFail($key);
+
+        // Ștergem fișierul vechi de pe HDD
+        Storage::disk('images')->delete($this->path . '/' . $image->imageable->id . '/' . $image->name);
+
+        // Setăm numele noii imagini
+        $newName = Str::random(4) . '_' . $value->getClientOriginalName();
+
+        // Salvăm fișierul nou pe disk
+        $value->storeAs($this->path . '/' . $image->imageable->id . '/', $newName, 'images');
+
+        // Actualizăm baza de date
+        $image->name = $newName;
+        $image->save();
+
+        // Resetăm doar pentru acea imagine
+        unset($this->newImages[$key]);
+    }
+
+    public function mount() {
+        foreach ($this->model->images as $image) {
+            $this->descriptions[$image->id] = $image->description;
+            $this->titles[$image->id] = $image->title;
+        }
+    }
+
+    public function updatedDescriptions($value, $key) {
+        // $key = id-ul imaginii (ex. 15)
+        // $value = noua descriere introdusă
+        
+        $this->validateOnly("descriptions.$key", [
+            "descriptions.$key" => "nullable|string|max:255",
+        ], [], [
+            "descriptions.$key" => "Descriere imagine",
+        ]);
+
+        $image = Image::find($key);
+        if ($image) {
+            $image->update(['description' => $value]);
+        }
+    }
+
+    public function updatedTitles($value, $key) {
+        // $key = id-ul imaginii
+        // $value = noul titlu introdus
+        
+        $this->validateOnly("titles.$key", [
+            "titles.$key" => "required|string|max:255",
+        ], [], [
+            "titles.$key" => "Titlu imagine",
+        ]);
+
+        $image = Image::find($key);
+        if ($image) {
+            $image->update(['title' => $value]); 
+        }
+    }
+
     #[On('permanent-delete-image')] 
     public function permanentDeleteImage($imageId) {
         // Căutăm imaginea care vrem să o ștergem:
         $image = Image::findOrFail($imageId);
-        // dd($this->path . '/' . $image->imageable->id . '/' . $image->name);
+        
         // Ștergem imaginea de pe HDD:
         Storage::disk('images')->delete($this->path . '/' . $image->imageable->id . '/' . $image->name);
 
         // Ștergem imaginea din baza de date:
         $image->delete();
-
-        // Facem refresh la pagină:
-        return redirect(request()->header('Referer'));
     }
 
     #[On('permanent-delete-all-images')] 
     public function permanentDeleteAllImages() {
         // Ștergem toate imaginile ce apartin modelului din baza de date:
-        foreach ($this->model->images as $key => $image) {
-            $image->delete();
-        }
+        $this->model->images()->delete();
 
         // Ștergem toate imaginile ce apartin modelului de pe HDD:
         Storage::disk('images')->deleteDirectory($this->path . '/' . $this->model->id);
-
-        // Facem refresh la pagină:
-        return redirect(request()->header('Referer'));
     }
 
     public function render()
     {
-        return view('livewire.admin.upload-images');
+        return view('livewire.admin.upload-and-edit-images');
     }
 }

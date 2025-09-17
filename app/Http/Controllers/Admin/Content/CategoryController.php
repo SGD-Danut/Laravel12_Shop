@@ -98,6 +98,7 @@ class CategoryController extends Controller
 
     public function showCategoryImagesForm($categoryId) {
         $category = Category::findOrFail($categoryId);
-        return view('admin.content.categories.add-edit-category-images')->with('category', $category);
+        $uploadImagesFor = "Category";
+        return view('admin.content.categories.upload-and-edit-category-images')->with('category', $category)->with('uploadImagesFor', $uploadImagesFor);
     }
 }
