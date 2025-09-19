@@ -12,4 +12,4 @@ use App\Http\Controllers\Front\Content\SectionController;
 |
 */
 
-Route::get('/sections/{sectionSlug}', [SectionController::class, 'showSection'])->name('show-section');
+Route::get('/section/{sectionSlug}', [SectionController::class, 'showSection'])->name('show-section');
