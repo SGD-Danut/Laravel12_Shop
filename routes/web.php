@@ -26,3 +26,4 @@ require __DIR__.'/admin/staff.php';
 require __DIR__.'/admin/users.php';
 require __DIR__.'/admin/content/sections.php';
 require __DIR__.'/admin/content/categories.php';
+require __DIR__.'/admin/content/brands.php';

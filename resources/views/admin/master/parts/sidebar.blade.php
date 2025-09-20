@@ -69,6 +69,7 @@
                 <h6 class="collapse-header">Content Components:</h6>
                 <a class="collapse-item" href="{{ route('show-sections') }}">Sections</a>
                 <a class="collapse-item" href="{{ route('show-categories') }}">Categories</a>
+                <a class="collapse-item" href="{{ route('show-brands') }}">Brands</a>
             </div>
         </div>
     </li>
