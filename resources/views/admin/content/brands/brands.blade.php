@@ -60,9 +60,9 @@
                                 </td>
                                 <td>
                                     {{-- Edit brand button: --}}
-                                    {{-- <a title="Edit brand" href="{{ route('edit-brand', $brand->id) }}" class="btn btn-success btn-circle">
+                                    <a title="Edit brand" href="{{ route('edit-brand', $brand->id) }}" class="btn btn-success btn-circle">
                                         <i class="fas fa-edit"></i>
-                                    </a> --}}
+                                    </a>
                                 </td>                                                        
                             </tr>
                         @empty

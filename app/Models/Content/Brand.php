@@ -22,4 +22,12 @@ class Brand extends Model
     public function defaultImageUrl() {
         return '/admin/img/content/brands/' . $this->image;
     }
+    // Aceasta este funcția pentru relația One To Many (Polymorphic)
+    public function images() {
+        return $this->morphMany(Image::class, 'imageable')->orderBy('position');
+    }
+    // galleryUrl() folosită pentru afișarea galeriei de imagini a brand-ului
+    public function galleryUrl() {
+        return '/storage/gallery/images/brands/' . $this->id . '/';
+    }
 }

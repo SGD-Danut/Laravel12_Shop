@@ -30,8 +30,7 @@ class Category extends Model
     public function images() {
         return $this->morphMany(Image::class, 'imageable')->orderBy('position');
     }
-
-    // defaultImageUrl() folosită pentru afișarea imaginii default a categoriei
+    // galleryUrl() folosită pentru afișarea galeriei de imagini a categoriei
     public function galleryUrl() {
         return '/storage/gallery/images/categories/' . $this->id . '/';
     }

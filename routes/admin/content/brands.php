@@ -16,4 +16,6 @@ Route::prefix('admin/content/brands')->middleware(['auth:staff'])->group(functio
     Route::get('show-brands', [BrandController::class, 'showBrands'])->name('show-brands');
     Route::get('new-brand', [BrandController::class, 'showNewBrandForm'])->name('new-brand');
     Route::post('create-new-brand', [BrandController::class, 'createNewBrand'])->name('create-new-brand');
+    Route::get('edit-brand/{brandId}', [BrandController::class, 'showEditBrandForm'])->name('edit-brand');
+    Route::put('update-brand/{brandId}', [BrandController::class, 'updateBrand'])->name('update-brand');
 });
