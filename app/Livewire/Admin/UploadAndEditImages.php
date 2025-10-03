@@ -23,6 +23,8 @@ class UploadAndEditImages extends Component
 
     public $path;
 
+    public $uploadImagesFor;
+
     // Câmpuri pentru editare:
     public $newImages = [];
     public $descriptions = [];

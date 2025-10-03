@@ -1,7 +1,7 @@
 @extends('admin.master.template')
     
 @section('content')
-    @include('admin.content.upload-and-edit-images')
+    @livewire('admin.upload-and-edit-images', ['uploadImagesFor' => $uploadImagesFor, 'model' => $category, 'path' => 'categories'])
 @endsection
 
 @section('custom-js')
