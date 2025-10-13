@@ -77,15 +77,24 @@
                                         <div class="card-body">
                                             <input wire:model.live.debounce.1000ms="titles.{{ $image->id }}" type="text" class="form-control" title="Image title" id="title-{{ $image->id }}" placeholder="Image title">
                                             <div wire:loading wire:target="titles.{{ $image->id }}" class="text-info">Saving title...</div>
+                                            @error("titles.$image->id")<div class="text-danger">{{ $message }}</div>@enderror
                                             <input wire:model.live.debounce.1000ms="descriptions.{{ $image->id }}" type="text" class="form-control" title="Image description" id="description-{{ $image->id }}" placeholder="Image description">
                                             <div wire:loading wire:target="descriptions.{{ $image->id }}" class="text-info">Saving description...</div>
+                                            @error("descriptions.$image->id")<div class="text-danger">{{ $message }}</div>@enderror
                                         </div>
-                                        {{-- Permanent delete image - SweetAlert Confirmation: --}}
                                         <div class="card-footer">
-                                            <button title="Permanent delete image" class="btn btn-danger btn-circle"
-                                                onclick="permanentDeleteImageConfirm('{{ $image->id }}', '{{ $image->name }}')">
-                                                <i class="fas fa-eraser"></i>
-                                            </button>
+                                            <div class="row">
+                                                <div class="form-group col-md-3">
+                                                    <input wire:model.live.debounce.1000ms="positions.{{ $image->id }}" type="number" class="form-control" title="Image position" id="position-{{ $image->id }}">
+                                                    <div wire:loading wire:target="positions.{{ $image->id }}" class="text-info">Saving position...</div>
+                                                </div>
+                                                {{-- Permanent delete image - SweetAlert Confirmation: --}}
+                                                <button title="Permanent delete image" class="btn btn-danger btn-circle"
+                                                    onclick="permanentDeleteImageConfirm('{{ $image->id }}', '{{ $image->name }}')">
+                                                    <i class="fas fa-eraser"></i>
+                                                </button>
+                                            </div>
+                                            @error("positions.$image->id")<div class="text-danger">{{ $message }}</div>@enderror
                                         </div>
                                     </div>
                                 </div>

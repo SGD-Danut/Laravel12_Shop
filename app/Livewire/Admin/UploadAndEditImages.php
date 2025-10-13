@@ -29,6 +29,7 @@ class UploadAndEditImages extends Component
     public $newImages = [];
     public $descriptions = [];
     public $titles = [];
+    public $positions = [];
 
     // Metode pentru încărcare:
     public function formatFileSize($bytes) {
@@ -81,24 +82,33 @@ class UploadAndEditImages extends Component
         
         $this->images = null;
 
+        // $this->deleteOldTempFiles();
+
         return redirect()->back();
     }
 
-    protected function cleanupOldUploads()
-    {
-        $storage = Storage::disk('local');
+    // protected function cleanupOldUploads()
+    // {
+    //     $storage = Storage::disk('local');
 
-        foreach ($storage->allFiles('livewire-tmp') as $filePathname) {
-            // On busy websites, this cleanup code can run in multiple threads causing part of the output
-            // of allFiles() to have already been deleted by another thread.
-            if (! $storage->exists($filePathname)) continue;
+    //     foreach ($storage->allFiles('livewire-tmp') as $filePathname) {
+    //         // On busy websites, this cleanup code can run in multiple threads causing part of the output
+    //         // of allFiles() to have already been deleted by another thread.
+    //         if (! $storage->exists($filePathname)) continue;
 
-            $yesterdaysStamp = now()->subSeconds(3)->timestamp;
-            if ($yesterdaysStamp > $storage->lastModified($filePathname)) {
-                $storage->delete($filePathname);
-            }
-        }
-    }
+    //         $yesterdaysStamp = now()->subSeconds(3)->timestamp;
+    //         if ($yesterdaysStamp > $storage->lastModified($filePathname)) {
+    //             $storage->delete($filePathname);
+    //         }
+    //     }
+    // }
+
+    // public function deleteOldTempFiles() {
+    //     $oldFiles = Storage::files('livewire-tmp');
+    //     foreach ($oldFiles as $file) {
+    //         Storage::delete($file);
+    //     }
+    // }
 
     // Metode pentru editare, ștergere:
     public function updatedNewImages($value, $key) {
@@ -143,6 +153,7 @@ class UploadAndEditImages extends Component
         foreach ($this->model->images as $image) {
             $this->descriptions[$image->id] = $image->description;
             $this->titles[$image->id] = $image->title;
+            $this->positions[$image->id] = $image->position;
         }
     }
 
@@ -175,6 +186,22 @@ class UploadAndEditImages extends Component
         $image = Image::find($key);
         if ($image) {
             $image->update(['title' => $value]); 
+        }
+    }
+
+    public function updatedPositions($value, $key) {
+        // $key = id-ul imaginii
+        // $value = noua valoare pentru poziție introdusă
+        
+        $this->validateOnly("positions.$key", [
+            "positions.$key" => "required|integer|min:1|max:1000",
+        ], [], [
+            "positions.$key" => "Poziție imagine",
+        ]);
+
+        $image = Image::find($key);
+        if ($image) {
+            $image->update(['position' => (int)$value]); 
         }
     }
 
