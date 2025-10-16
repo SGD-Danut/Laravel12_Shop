@@ -84,6 +84,8 @@ class UploadAndEditImages extends Component
 
         // $this->deleteOldTempFiles();
 
+        $this->mount(); // Apelăm ca să ne fie actualizare input-urile.
+
         return redirect()->back();
     }
 

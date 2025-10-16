@@ -14,6 +14,6 @@
 
     @include('front.master.parts.recent-products')
 
-    @include('front.master.parts.vendors')
+    <x-content.active-brands />
 
 @endsection
