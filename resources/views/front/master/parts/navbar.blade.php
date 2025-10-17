@@ -19,7 +19,8 @@
                 </button>
                 <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                     <div class="navbar-nav mr-auto py-0">
-                        <a href="index.html" class="nav-item nav-link active">Home</a>
+                        <a href="{{ route('show-home-page') }}" class="nav-item nav-link {{ request()->routeIs('show-home-page') ? 'active' : '' }}">Home</a>
+                        <a href="{{ route('show-all-brands') }}" class="nav-item nav-link {{ request()->routeIs('show-all-brands') ? 'active' : '' }}">Brands</a>
                         <a href="shop.html" class="nav-item nav-link">Shop</a>
                         <a href="detail.html" class="nav-item nav-link">Shop Detail</a>
                         <div class="nav-item dropdown">
