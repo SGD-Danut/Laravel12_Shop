@@ -23,7 +23,15 @@ class Section extends Model
         return '/admin/img/content/sections/' . $this->image;
     }
 
+    // Aceasta este funcția pentru relația One To Many
+    // O secțiune are mai multe categorii
     public function categories() {
         return $this->hasMany(Category::class, 'section_id')->orderBy('position');
+    }
+
+    // Aceasta este funcția pentru relația One To Many
+    // O secțiune are mai multe produse
+    public function products() {
+        return $this->hasMany(Product::class, 'section_id', 'id');
     }
 }

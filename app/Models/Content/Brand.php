@@ -50,4 +50,10 @@ class Brand extends Model
     public function galleryUrl() {
         return '/storage/gallery/images/brands/' . $this->id . '/';
     }
+
+    // Aceasta este funcția pentru relația One To Many
+    // Un brand are mai multe produse
+    public function products() {
+        return $this->hasMany(Product::class, 'brand_id', 'id');
+    }
 }

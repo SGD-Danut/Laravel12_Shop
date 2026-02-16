@@ -10,6 +10,12 @@ class Category extends Model
     /** @use HasFactory<\Database\Factories\Content\CategoryFactory> */
     use HasFactory;
 
+    // Aceasta este funcția pentru relația ManyTo Many
+    // O categorie are mai multe produse
+    public function products() {
+        return $this->belongsToMany(Product::class, 'category_product', 'category_id', 'product_id');
+    }
+
     // imageUrl() folosită pentru afișarea imaginii categoriei
     public function imageUrl() {
         return '/storage/images/admin/content/categories/' . $this->image;
