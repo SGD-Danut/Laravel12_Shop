@@ -70,6 +70,7 @@
                 <a class="collapse-item" href="{{ route('show-sections') }}">Sections</a>
                 <a class="collapse-item" href="{{ route('show-categories') }}">Categories</a>
                 <a class="collapse-item" href="{{ route('show-brands') }}">Brands</a>
+                <a class="collapse-item" href="{{ route('show-products') }}">Products</a>
             </div>
         </div>
     </li>
