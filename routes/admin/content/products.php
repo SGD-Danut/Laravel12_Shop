@@ -18,4 +18,5 @@ Route::prefix('admin/content/products')->middleware(['auth:staff'])->group(funct
     Route::post('create-new-product', [ProductController::class, 'createNewProduct'])->name('create-new-product');
     Route::get('edit-product/{productId}', [ProductController::class, 'showEditProductForm'])->name('edit-product');
     Route::put('update-product/{productId}', [ProductController::class, 'updateProduct'])->name('update-product');
+    Route::get('/manage-product-images-form/{productId}',[ProductController::class, 'showProductImagesForm'])->name('manage-product-images'); // Aceasta
 });

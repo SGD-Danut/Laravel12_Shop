@@ -67,6 +67,10 @@
                                     <a title="Edit product" href="{{ route('edit-product', $product->id) }}" class="btn btn-success btn-circle">
                                         <i class="fas fa-edit"></i>
                                     </a>
+                                    {{-- Image gallery for product button: --}}
+                                    <a title="Image gallery for product" href="{{ route('manage-product-images', $product->id) }}" class="btn btn-primary btn-circle">
+                                        <i class="far fa-images"></i>
+                                    </a>
                                 </td>
                             </tr>
                             @empty

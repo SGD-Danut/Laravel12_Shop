@@ -112,4 +112,10 @@ class ProductController extends Controller
 
         return redirect()->back()->with('success', $successUpdateMessage);
     }
+
+    public function showProductImagesForm($productId) {
+        $product = Product::findOrFail($productId);
+        $uploadImagesFor = "Product";
+        return view('admin.content.products.upload-and-edit-product-images')->with('product', $product)->with('uploadImagesFor', $uploadImagesFor);
+    }
 }
