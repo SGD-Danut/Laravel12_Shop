@@ -55,6 +55,15 @@ return [
             'throw' => false,
             'report' => false,
         ],
+        
+        'images2' => [
+            'driver' => 'local',
+            'root' => public_path('storage/images/admin/content/'),
+            'url' => env('APP_URL').'/public',
+            'visibility' => 'public',
+            'throw' => false,
+            'report' => false,
+        ],
 
         's3' => [
             'driver' => 's3',

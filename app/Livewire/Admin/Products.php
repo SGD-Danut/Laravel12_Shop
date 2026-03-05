@@ -16,7 +16,7 @@ class Products extends Component
 
     public function render()
     {
-        $this->products = Product::query()->orderBy('name')->paginate();
+        $this->products = Product::query()->orderBy('created_at', 'desc')->paginate();
         return view('livewire.admin.products', [
             'products' => $this->products
         ]);

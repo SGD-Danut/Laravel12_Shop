@@ -1,6 +1,14 @@
 <div>
     <!-- Page Heading -->
     <h1 class="h3 mb-2 text-gray-800">Products</h1>
+    <div class="card-body">
+        <a href="{{ route('new-product') }}" class="btn btn-primary btn-icon-split">
+            <span class="icon text-white-50">
+                <i class="fas fa-plus"></i>
+            </span>
+            <span class="text">New Product</span>
+        </a>
+    </div>
     <!-- Products Table -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
@@ -20,6 +28,7 @@
                                 <th>Stock</th>
                                 <th>Position</th>
                                 <th>Added date</th>
+                                <th>Active / Promoted</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -33,6 +42,7 @@
                                 <th>Stock</th>
                                 <th>Position</th>
                                 <th>Added date</th>
+                                <th>Active / Promoted</th>
                                 <th>Actions</th>
                             </tr>
                         </tfoot>
@@ -42,18 +52,22 @@
                                 <td>{{ $products->currentPage() > 1 ? $loop->iteration + $products->perPage() * ($products->currentPage() - 1) : $loop->iteration }}</td>
                                 <td>{{ $product->name }}</td>
                                 <td class="text-center">
-                                    @if ($product->image != 'product.png')
-                                        <img src="{{ $product->imageUrl() }}" width="60" alt="">
-                                    @else
-                                        <img src="{{ $product->defaultImageUrl() }}" width="60" alt="">
-                                    @endif
+                                    @livewire('admin.product-image', ['model' => $product, 'defaultProductImage' => 'product.png', 'productImageDirectoryForSaving' => 'products'], key($product->id))
                                 </td>
                                 <td>{{ $product->price }} / {{ $product->discount }}</td>
                                 <td>{{ $product->views }}</td>
                                 <td>{{ $product->stock }}</td>
                                 <td>{{ $product->position }}</td>
                                 <td>{{ $product->created_at->format('d.m.Y') }}</td>
-                                <td></td>
+                                <td>
+                                    @livewire('admin.section-status',['section' => $product], key($product->id))
+                                </td>
+                                <td>
+                                    {{-- Edit product button: --}}
+                                    <a title="Edit product" href="{{ route('edit-product', $product->id) }}" class="btn btn-success btn-circle">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                </td>
                             </tr>
                             @empty
                                 <div class="alert alert-warning">No products!</div>
