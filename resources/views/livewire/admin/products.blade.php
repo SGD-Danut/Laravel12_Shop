@@ -51,7 +51,7 @@
                             <tr>
                                 <td>{{ $products->currentPage() > 1 ? $loop->iteration + $products->perPage() * ($products->currentPage() - 1) : $loop->iteration }}</td>
                                 <td>{{ $product->name }}</td>
-                                <td class="text-center">
+                                <td class="text-center" wire:ignore>
                                     @livewire('admin.product-image', ['model' => $product, 'defaultProductImage' => 'product.png', 'productImageDirectoryForSaving' => 'products'], key($product->id))
                                 </td>
                                 <td>{{ $product->price }} / {{ $product->discount }}</td>
@@ -59,7 +59,7 @@
                                 <td>{{ $product->stock }}</td>
                                 <td>{{ $product->position }}</td>
                                 <td>{{ $product->created_at->format('d.m.Y') }}</td>
-                                <td>
+                                <td wire:ignore>
                                     @livewire('admin.section-status',['section' => $product], key($product->id))
                                 </td>
                                 <td>
@@ -71,6 +71,10 @@
                                     <a title="Image gallery for product" href="{{ route('manage-product-images', $product->id) }}" class="btn btn-primary btn-circle">
                                         <i class="far fa-images"></i>
                                     </a>
+                                    <!-- Button trigger for change categories modal -->
+                                    <button wire:click="obtainProductId({{ $product->id }})" type="button" class="btn btn-secondary btn-circle" data-toggle="modal" data-target="#productCategoriesModal">
+                                        <i class="fas fa-bars"></i>
+                                    </button>
                                 </td>
                             </tr>
                             @empty
@@ -83,4 +87,5 @@
             </div>
         @endif
     </div>
+    @include('admin.content.products.product-categories-modal')
 </div>
