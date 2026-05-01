@@ -12,23 +12,35 @@
     <!-- Products Table -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">{{ $products->total() }} products {{ isset($selectedSectionTitle) ? 'from section:' . ' ' . $selectedSectionTitle : '' }} {{ isset($selectedCategoryTitle) ? 'and from category:' . ' ' . $selectedCategoryTitle : '' }}</h6>
+            @isset ($products)
+                <h6 class="m-0 font-weight-bold text-primary">{{ $products->total() }} products {{ isset($selectedSectionTitle) ? 'from section:' . ' ' . $selectedSectionTitle : '' }} {{ isset($selectedCategoryTitle) ? 'and from category:' . ' ' . $selectedCategoryTitle : '' }}</h6>
+            @else
+                <h6 class="m-0 font-weight-bold text-primary">No products!</h6>
+            @endisset
             <br>
             <h6>Sections:</h6>
             @forelse ($sections as $section)
                 <span wire:click="selectSection({{ $section->id }})" class="badge {{ $selectedSectionId == $section->id ? 'badge-primary' : 'badge-secondary' }}" style="cursor: pointer">{{ $section->name }}</span>
             @empty
-                <p>No sections and no products!</p>
+                <p>This section has no products!</p>
             @endforelse
             <br>
-            <h6>Categories:</h6>
             @if (isset($selectedCategories))
+                <br>
+                <h6>Categories:</h6>
                 @forelse ($selectedCategories as $selectedCategory)
                     <span wire:click="selectCategory({{ $selectedCategory->id }})" class="badge {{ $selectedCategoryId == $selectedCategory->id ? 'badge-primary' : 'badge-secondary' }}" style="cursor: pointer">{{ $selectedCategory->name }}</span>
                 @empty
                     <p>No selected section, no categories!</p>
                 @endforelse
             @endif
+            <br>
+            <h6>Brands:</h6>
+            @forelse ($brands as $brand)
+                <span wire:click="selectBrand({{ $brand->id }})" class="badge {{ $selectedBrandId == $brand->id ? 'badge-primary' : 'badge-secondary' }}" style="cursor: pointer">{{ $brand->name }}</span>
+            @empty
+                <p>No brands!</p>
+            @endforelse
         </div>
         @if (isset($products))
             <div class="card-body">
@@ -38,7 +50,7 @@
                             <tr>
                                 <th>#</th>
                                 <th>Name</th>
-                                <th>Section / Categories</th>
+                                <th>Section / Categories / Brand</th>
                                 <th>Image</th>
                                 <th>Price / Discount</th>
                                 <th>Views</th>
@@ -53,7 +65,7 @@
                             <tr>
                                 <th>#</th>
                                 <th>Name</th>
-                                <th>Section / Categories</th>
+                                <th>Section / Categories / Brand</th>
                                 <th>Image</th>
                                 <th>Price / Discount</th>
                                 <th>Views</th>
@@ -73,14 +85,19 @@
                                 </td>
                                 <td>
                                     Section: 
-                                    <span wire:click="selectSection({{ $section->id }})" class="badge {{ $selectedSectionId == $section->id ? 'badge-primary' : 'badge-secondary' }}" style="cursor: pointer">{{ $product->section->name }}</span>
+                                    <span wire:click="selectSection({{ $product->section->id }})" class="badge {{ $selectedSectionId == $product->section->id ? 'badge-primary' : 'badge-secondary' }}" style="cursor: pointer">{{ $product->section->name }}</span>
                                     <br>
                                     Categories:
                                     @forelse ($product->categories as $productCategory)
                                         <span wire:click="selectCategory({{ $productCategory->id }})" class="badge {{ $selectedCategoryId == $productCategory->id ? 'badge-primary' : 'badge-secondary' }}" style="cursor: pointer">{{ $productCategory->name }}</span>
                                     @empty
-                                        <p>This product has no categories!</p>
+                                        This product has no categories!
                                     @endforelse
+                                    <br>
+                                    Brand:
+                                    @isset($product->brand)
+                                        <span wire:click="selectBrand({{ $product->brand->id }})" class="badge {{ $selectedBrandId == $product->brand->id ? 'badge-primary' : 'badge-secondary' }}" style="cursor: pointer">{{ isset($product->brand->name) ? $product->brand->name : 'This product has no brand!' }}</span>
+                                    @endisset
                                 </td>
                                 {{-- <td class="text-center" wire:ignore>
                                     @livewire('admin.product-image', ['model' => $product, 'defaultProductImage' => 'product.png', 'productImageDirectoryForSaving' => 'products'])
